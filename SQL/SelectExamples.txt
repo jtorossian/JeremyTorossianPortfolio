@@ -1,0 +1,12 @@
+Commands For assignment
+1. show tables
+2. Select * from BabyName LIMIT 10;
+3. Select DISTINCT year from BabyName where name = 'Jeremy';
+4. Select DISTINCT name from BabyName where year = '1997' LIMIT 10;
+5.  select name, count(name) from BabyName where (year = 1997) AND (gender = 'F') group by name order by count(name), gender;
+5.  select name, count(name) from BabyName where (year = 1997) AND (gender = 'M') group by name order by count(name), gender;
+6. select * from BabyName where name like "%J____y%" order by name, count, year LIMIT 10;
+7. select count(*) from BabyName;
+8. select count(name) from BabyName where year = 1960;
+9. select gender, count(name) from BabyName where year = 1964 group by gender;
+10. select  place, count(name) from BabyName group by place;

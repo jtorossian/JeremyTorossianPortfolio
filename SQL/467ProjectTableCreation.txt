@@ -1,0 +1,38 @@
+drop table if exists event;
+drop table if exists vendor;
+drop table if exists agent;
+drop table if exists artist;
+drop table if exists band;
+drop table if exists employee;
+
+
+
+create table artist
+(artistID INT NOT NULL AUTO_INCREMENT, firstName VARCHAR(15), lastName VARCHAR(15), middleinitial VARCHAR(2), Gender VARCHAR(7), 
+PerConcertRate VARCHAR(10), phoneNumber VARCHAR(12), email VARCHAR(30), agentID int,PRIMARY KEY (artistID));
+
+create table band
+(bandID int not null AUTO_INCREMENT, bandName VARCHAR(15), agentID int, primary key(bandID));
+
+create table agent
+(agentID INT NOT NULL AUTO_INCREMENT, firstName VARCHAR(15), lastName VARCHAR(15), middleinitial VARCHAR(2), Street VARCHAR(15), City VARCHAR(15), State VARCHAR(15), 
+OfficephoneNumber VARCHAR(12), CellphoneNumber VARCHAR(12), email VARCHAR(30), artistID INT, bandID INT, PRIMARY KEY (agentID), foreign key(artistID) REFERENCES artist(artistID), foreign key(bandID) REFERENCES band(bandID));
+
+alter table artist ADD foreign key(agentID) REFERENCES artist(artistID);
+
+
+alter table band ADD foreign key(agentID) REFERENCES artist(artistID);
+
+create table employee
+(empID int not null AUTO_INCREMENT, empName VARCHAR(35), agentID int, primary key(empID));
+
+create table vendor
+(vendorID int not null AUTO_INCREMENT, businessName VARCHAR(15), VendorType VARCHAR(15), primary key(vendorID));
+
+Create table event
+(eventID INT NOT NULL AUTO_INCREMENT, date VARCHAR(15), startTime VARCHAR(7), capacity INT, Notes VARCHAR(200), dateLatest VARCHAR(15), approvalDateTime VARCHAR(25), TickPrice VARCHAR(15), TicketSold INT,
+Street VARCHAR(15), City VARCHAR(15), State VARCHAR(15), artistID INT, bandID INT, agentID INT, vendorID INT, empID INT, PRIMARY KEY (eventID), 
+foreign key(artistID) references artist(artistID), foreign key(agentID) references agent(agentID), 
+foreign key(bandID) references band(bandID), foreign key(vendorID) references vendor(vendorID), foreign key(empID) references employee(empID));
+
+
